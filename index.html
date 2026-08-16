@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FreeAdWorld — post and discover classified ads for free around the world.">
+  <title>FreeAdWorld — Free Classified Ads Worldwide</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="FreeAdWorld home">
+      <span class="brand-mark">F</span>
+      <span>FreeAd<span>World</span></span>
+    </a>
+    <nav class="nav">
+      <a href="#home">Home</a>
+      <a href="#browse">Browse Ads</a>
+      <a href="#categories">Categories</a>
+      <button class="post-btn" onclick="openPostModal()">Post Your Ad — FREE</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <span class="eyebrow">🌍 GLOBAL FREE CLASSIFIEDS</span>
+          <h1>Advertise anything.<br><span>For free.</span></h1>
+          <p>Buy, sell, promote and discover products and services from people and businesses around the world.</p>
+          <div class="hero-actions">
+            <button class="primary" onclick="openPostModal()">+ Post Your Free Ad</button>
+            <a class="secondary" href="#browse">Browse Ads</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="mini-stat"><strong>100%</strong><span>Free to post</span></div>
+          <div class="mini-stat"><strong>🌍</strong><span>Worldwide</span></div>
+          <div class="mini-stat"><strong>📱</strong><span>Mobile friendly</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="search-section">
+      <div class="search-box">
+        <input id="searchInput" type="search" placeholder="Search products, services, jobs, property..." oninput="renderAds()">
+        <select id="countryFilter" onchange="renderAds()">
+          <option value="">All countries</option>
+          <option>Pakistan</option><option>Saudi Arabia</option><option>UAE</option><option>UK</option>
+          <option>USA</option><option>Canada</option><option>Australia</option>
+        </select>
+        <button onclick="renderAds()">Search</button>
+      </div>
+    </section>
+
+    <section id="categories" class="section">
+      <div class="section-head">
+        <div><span class="eyebrow">EXPLORE</span><h2>Popular Categories</h2></div>
+      </div>
+      <div class="category-grid">
+        <button onclick="filterCategory('Electronics')">📱<span>Electronics</span></button>
+        <button onclick="filterCategory('Vehicles')">🚗<span>Vehicles</span></button>
+        <button onclick="filterCategory('Property')">🏠<span>Property</span></button>
+        <button onclick="filterCategory('Fashion')">⌚<span>Fashion</span></button>
+        <button onclick="filterCategory('Services')">💼<span>Services</span></button>
+        <button onclick="filterCategory('Jobs')">💼<span>Jobs</span></button>
+        <button onclick="filterCategory('Home')">🛋️<span>Home & Garden</span></button>
+        <button onclick="filterCategory('Other')">📦<span>Other</span></button>
+      </div>
+    </section>
+
+    <section id="browse" class="section ads-section">
+      <div class="section-head">
+        <div><span class="eyebrow">LATEST</span><h2>Latest Ads</h2></div>
+        <button class="link-btn" onclick="clearFilters()">View all</button>
+      </div>
+      <div id="adsGrid" class="ads-grid"></div>
+      <div id="emptyState" class="empty" hidden>No ads match your search yet.</div>
+    </section>
+
+    <section class="how section">
+      <div class="section-head"><div><span class="eyebrow">HOW IT WORKS</span><h2>Simple. Free. Global.</h2></div></div>
+      <div class="steps">
+        <div><b>1</b><h3>Create an ad</h3><p>Add your product or service in minutes.</p></div>
+        <div><b>2</b><h3>Publish for free</h3><p>No paid advertising required.</p></div>
+        <div><b>3</b><h3>Get discovered</h3><p>People can search, save and share your ad.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div><strong>FreeAdWorld</strong><p>Free advertising for everyone, everywhere.</p></div>
+    <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Contact</a></div>
+  </footer>
+
+  <div id="modal" class="modal" hidden>
+    <div class="modal-backdrop" onclick="closePostModal()"></div>
+    <div class="modal-card">
+      <button class="close" onclick="closePostModal()">×</button>
+      <span class="eyebrow">FREE LISTING</span>
+      <h2>Post Your Ad</h2>
+      <p class="muted">Demo mode: ads are stored locally for now. We'll connect the real database in the next step.</p>
+      <form onsubmit="submitAd(event)">
+        <label>Title<input id="adTitle" required placeholder="e.g. iPhone 15 Pro"></label>
+        <div class="two">
+          <label>Category<select id="adCategory"><option>Electronics</option><option>Vehicles</option><option>Property</option><option>Fashion</option><option>Services</option><option>Jobs</option><option>Home</option><option>Other</option></select></label>
+          <label>Price<input id="adPrice" placeholder="e.g. 250,000"></label>
+        </div>
+        <div class="two">
+          <label>Country<select id="adCountry"><option>Pakistan</option><option>Saudi Arabia</option><option>UAE</option><option>UK</option><option>USA</option><option>Canada</option><option>Australia</option></select></label>
+          <label>City<input id="adCity" required placeholder="e.g. Karachi"></label>
+        </div>
+        <label>Description<textarea id="adDescription" required rows="4" placeholder="Describe your product or service..."></textarea></label>
+        <button class="primary full" type="submit">Publish Free Ad</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
